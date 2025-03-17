@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "lib": ["ES2016", "DOM"],
+    "module": "ESNext",
+    "target": "ES6",
+    "moduleResolution": "Node",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "typeRoots": ["./node_modules/@types"]
+  },
+  "include": ["src/**/*", "src/types/**/*.d.ts"],
+  "exclude": ["node_modules", "dist"]
+}
