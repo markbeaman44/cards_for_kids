@@ -17,7 +17,7 @@ export default class baseUI {
     }
 
     public addInteractiveTextWithBorder(
-        x: number, y: number, title: string, onSuccessCallback: () => void
+        x: number, y: number, title: string, backgroundColor:any, onSuccessCallback: () => void
     ): Phaser.GameObjects.Container {
 
         const fixedWidth = 150;
@@ -40,7 +40,7 @@ export default class baseUI {
             text.y + text.height / 2, 
             text.width + 20,          
             text.height + 20,         
-            0xfefade
+            backgroundColor
         ).setStrokeStyle(4, 0x000000) // Stroke thickness and color
          .setOrigin(0.5);  // Ensure proper positioning
     
