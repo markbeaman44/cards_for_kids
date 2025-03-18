@@ -1,4 +1,5 @@
 import baseUI from "./baseUI.js";
+import gridHelper from "./gridHelper.js";
 export default class baseLevel extends Phaser.Scene {
     constructor(levelKey) {
         super({ key: levelKey });
@@ -16,6 +17,8 @@ export default class baseLevel extends Phaser.Scene {
         this.placeMe = 0;
     }
     init() {
+        this.isPlayerTurn = false;
+        this.isAiTurn = true;
         this.playerScore = 0;
         this.aiScore = 0;
         this.currentRound = 1;
@@ -34,13 +37,23 @@ export default class baseLevel extends Phaser.Scene {
     create() {
         // Initialize classes
         this.baseUI = new baseUI(this, '24px');
-        let menuText = this.baseUI.addInteractiveTextWithBorder(310, -380, `Main Menu`, () => {
+        this.gridHelper = new gridHelper(this);
+        this.gridHelper.gridSetup();
+        let menuText = this.baseUI.addInteractiveTextWithBorder(310, -380, `Main Menu`, 0xfefade, () => {
             this.scene.start('mainMenu');
             this.cleanup();
         });
-        let restartText = this.baseUI.addInteractiveTextWithBorder(505, -380, `Restart`, () => {
+        let restartText = this.baseUI.addInteractiveTextWithBorder(505, -380, `Restart`, 0xfefade, () => {
             this.scene.restart();
             this.cleanup();
+        });
+        let gridBoard = this.baseUI.addInteractiveTextWithBorder(310, -310, `Helper`, 0xfefade, () => {
+            if (this.gridHelper.modal.y >= 0) {
+                this.gridHelper.hideModal();
+            }
+            else {
+                this.gridHelper.showModal();
+            }
         });
         this.cameras.main.setBackgroundColor(this.backgroundColour);
         this.input.setDefaultCursor('default');
@@ -50,8 +63,8 @@ export default class baseLevel extends Phaser.Scene {
         this.aiHand = this.deck.splice(0, 5);
         this.scoreDisplay();
         // Create a container for all elements
-        this.containerGroup = this.add.container(this.scale.width / 2, this.scale.height / 2, [restartText, this.scoreText, menuText]);
-        let scaleFactor = this.scale.width < 1050 ? 0.5 : this.scale.width < 1350 ? 0.8 : 1;
+        this.containerGroup = this.add.container(this.scale.width / 2, this.scale.height / 2, [restartText, this.scoreText, menuText, gridBoard]);
+        let scaleFactor = this.scale.width < 1050 ? 0.5 : this.scale.width < 1350 ? 0.8 : 0.9;
         this.containerGroup.setScale(scaleFactor);
         this.scale.on("resize", this.resizeGame, this);
     }
@@ -319,7 +332,7 @@ export default class baseLevel extends Phaser.Scene {
     }
     resizeGame(gameSize) {
         let { width, height } = gameSize;
-        let scaleFactor = width < 1050 ? 0.5 : width < 1350 ? 0.8 : 1;
+        let scaleFactor = width < 1050 ? 0.5 : width < 1350 ? 0.8 : 0.9;
         this.containerGroup.setScale(scaleFactor);
         // Ensure camera covers full size
         this.cameras.resize(width, height);

@@ -21,7 +21,7 @@ export default class mainMenu extends Phaser.Scene {
         for (let i = 1; i <= 10; i++) {
             let x = i % 2 === 0 ? 20 : -160;
             let y = -200 + Math.floor((i - 1) / 2) * 75;
-            let levelText = this.levelUI.addInteractiveTextWithBorder(x, y, `Level ${i}`, () => { this.scene.start(`level${i}`); });
+            let levelText = this.levelUI.addInteractiveTextWithBorder(x, y, `Level ${i}`, 0xfefade, () => { this.scene.start(`level${i}`); });
             levelButtons.push(levelText);
         }
         // Create a container for all elements

@@ -10,7 +10,7 @@ export default class baseUI {
             .on('pointerout', () => { this.scene.input.setDefaultCursor('default'); })
             .on('pointerdown', onSuccessCallback);
     }
-    addInteractiveTextWithBorder(x, y, title, onSuccessCallback) {
+    addInteractiveTextWithBorder(x, y, title, backgroundColor, onSuccessCallback) {
         const fixedWidth = 150;
         const fixedHeight = 60;
         const text = this.scene.add.text(x, y, title, {
@@ -25,7 +25,7 @@ export default class baseUI {
             .on('pointerout', () => { this.scene.input.setDefaultCursor('default'); })
             .on('pointerdown', onSuccessCallback);
         ;
-        const background = this.scene.add.rectangle(text.x + text.width / 2, text.y + text.height / 2, text.width + 20, text.height + 20, 0xfefade).setStrokeStyle(4, 0x000000) // Stroke thickness and color
+        const background = this.scene.add.rectangle(text.x + text.width / 2, text.y + text.height / 2, text.width + 20, text.height + 20, backgroundColor).setStrokeStyle(4, 0x000000) // Stroke thickness and color
             .setOrigin(0.5); // Ensure proper positioning
         const container = this.scene.add.container(0, 0, [background, text]);
         container.setSize(fixedWidth, fixedHeight);
