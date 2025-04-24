@@ -9,7 +9,11 @@ export default class baseUI {
     public addInteractiveText(
         x: number, y: number, title: string, onSuccessCallback: () => void
     ): Phaser.GameObjects.Text {
-        return this.scene.add.text(x, y, title, { fontSize: this.fontSize, color: "#0f0" })
+        return this.scene.add.text(x, y, title, {
+            fontSize: this.fontSize,
+            color: "#0f0",
+            fontStyle: "bold"
+        })
             .setInteractive()
             .on('pointerover', () => { this.scene.input.setDefaultCursor('pointer') })
             .on('pointerout', () => { this.scene.input.setDefaultCursor('default') })
@@ -27,7 +31,8 @@ export default class baseUI {
             fontSize: this.fontSize,
             color: "#000000",
             align: 'center',
-            padding: { x: 10, y: 10 }
+            padding: { x: 10, y: 10 },
+            fontStyle: "bold"
         })
         .setFixedSize(fixedWidth, fixedHeight - 20)
         .setInteractive()
