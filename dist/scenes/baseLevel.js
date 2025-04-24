@@ -64,8 +64,7 @@ export default class baseLevel extends Phaser.Scene {
         this.scoreDisplay();
         // Create a container for all elements
         this.containerGroup = this.add.container(this.scale.width / 2, this.scale.height / 2, [restartText, this.scoreText, menuText, gridBoard]);
-        let scaleFactor = this.scale.width < 1050 ? 0.5 : this.scale.width < 1350 ? 0.8 : 0.9;
-        this.containerGroup.setScale(scaleFactor);
+        this.resizeGame(this.scale.gameSize);
         this.scale.on("resize", this.resizeGame, this);
     }
     cleanup() {
@@ -332,8 +331,9 @@ export default class baseLevel extends Phaser.Scene {
     }
     resizeGame(gameSize) {
         let { width, height } = gameSize;
-        let scaleFactor = width < 1050 ? 0.5 : width < 1350 ? 0.8 : 0.9;
-        this.containerGroup.setScale(scaleFactor);
+        let scaleFactorX = width < 700 ? 0.4 : width < 1300 ? 0.6 : width < 1500 ? 0.8 : 1;
+        let scaleFactorY = height < 800 ? 0.4 : height < 1000 ? 0.6 : height < 1200 ? 0.8 : 1;
+        this.containerGroup.setScale(scaleFactorX, scaleFactorY);
         // Ensure camera covers full size
         this.cameras.resize(width, height);
         // Reposition Images within Group

@@ -74,8 +74,7 @@ export default class gridHelper {
         this.modal.add(closeButton);
         this.modal.add(closeText);
 
-        let scaleFactor = this.scene.scale.width < 1050 ? 0.5 : this.scene.scale.width < 1350 ? 0.8 : 1;
-        this.modal.setScale(scaleFactor);
+        this.resizeGame(this.scene.scale.gameSize);
         this.scene.scale.on("resize", this.resizeGame, this);
     }
     
@@ -111,8 +110,9 @@ export default class gridHelper {
     resizeGame(gameSize: Phaser.Structs.Size) {
         let { width, height } = gameSize;
     
-        let scaleFactor = width < 1050 ? 0.5 : width < 1350 ? 0.8 : 0.9;
-        this.modal.setScale(scaleFactor);
+        let scaleFactorX = width < 700 ? 0.4 : width < 1300 ? 0.6 : width < 1500 ? 0.8 : 1;
+        let scaleFactorY = height < 800 ? 0.4 : height < 1000 ? 0.6 : height < 1200 ? 0.8 : 1;
+        this.modal.setScale(scaleFactorX, scaleFactorY);
     
         if (this.isModalVisible) {
             this.modal.setPosition(width / 2, height / 2);
