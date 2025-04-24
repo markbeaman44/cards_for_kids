@@ -8,7 +8,7 @@ export default class gridHelper {
     }
     gridSetup() {
         // Initialize classes
-        this.baseUI = new baseUI(this.scene, '20px');
+        this.baseUI = new baseUI(this.scene, '30px');
         this.gridSize = 10;
         this.cellSize = 60;
         this.grid = [];
